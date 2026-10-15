@@ -1,0 +1,62 @@
+# base image
+ARG PYTHON_VERSION=3.14
+ARG CONTAINER_BASE_IMAGE_NAME=python
+ARG CONTAINER_BASE_IMAGE_TAG=${PYTHON_VERSION}-slim-trixie
+ARG CONTAINER_BASE_IMAGE_DIGEST=sha256:a2b82f3c48559aa0a8446d9af49826b6e2b2016f4cd2afabfe6013ec53729170
+FROM ${CONTAINER_BASE_IMAGE_NAME}:${CONTAINER_BASE_IMAGE_TAG}@${CONTAINER_BASE_IMAGE_DIGEST} AS base
+
+# timezone
+ENV TZ="Etc/UTC"
+
+# set locale
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
+
+ARG DEBIAN_FRONTEND=noninteractive
+RUN rm -f /etc/apt/apt.conf.d/docker-clean
+
+# install apt packages and dependencies
+RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
+    apt-get update && \
+    apt-get install -y --no-install-recommends \
+    sudo git make curl gnupg2 wget ca-certificates openssh-client
+
+# Install uv
+ARG UV_VERSION=0.13.1
+ARG UV_DIGEST=sha256:4a1f3666816dafadd20ceb71eac9a7d56d7ef30279f7d64048519ab901ada336
+COPY --from=ghcr.io/astral-sh/uv:${UV_VERSION}@${UV_DIGEST} /uv /uvx /bin/
+
+ARG USERNAME=devcontainer
+ARG USER_UID=1000
+ARG USER_GID=1000
+# add $USER to usergroup
+RUN groupadd --gid ${USER_GID} ${USERNAME} &&\
+    useradd --uid ${USER_UID} --gid ${USER_GID} -m ${USERNAME} -s /bin/bash && \
+    usermod -aG sudo ${USERNAME} && \
+    echo "${USERNAME}:${USERNAME}_super_user" | chpasswd
+
+# user
+USER ${USERNAME}
+
+# create venv
+RUN mkdir -p /home/${USERNAME}/.venv
+
+ENV UV_LINK_MODE=copy
+ENV UV_COMPILE_BYTECODE=1
+ENV UV_PROJECT_ENVIRONMENT=/home/${USERNAME}/.venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# Install dependencies
+RUN --mount=type=bind,source=pyproject.toml,target=/tmp/uv-project/pyproject.toml \
+    --mount=type=bind,source=uv.lock,target=/tmp/uv-project/uv.lock \
+    --mount=type=bind,source=.python-version,target=/tmp/uv-project/.python-version \
+    --mount=type=cache,target=/tmp/uv-cache,uid=${USER_UID},gid=${USER_GID},sharing=locked \
+    UV_CACHE_DIR=/tmp/uv-cache \
+    uv sync --project /tmp/uv-project --frozen --no-install-project
+    
+# working directory
+ARG REPOSITORY_NAME=PRML
+WORKDIR /${REPOSITORY_NAME}
+
+# entry point
+ENTRYPOINT ["/bin/bash"]

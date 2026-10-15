@@ -1,0 +1,30 @@
+[project]
+name = "PRML"
+version = "0.1.0"
+description = "Pattern Matching and Machine Learning Notes"
+readme = "README.md"
+authors = [
+    { name = "Mitul Vekariya" }
+]
+requires-python = ">=3.14"
+dependencies = [
+    "matplotlib>=3.11.2",
+    "numpy>=2.5.4",
+    "pandas>=3.0.6",
+    "ruff>=0.17.0",
+]
+
+[project.scripts]
+prml = "prml:main"
+
+[build-system]
+requires = ["uv_build>=0.13.1,<0.14.0"]
+build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "ipykernel>=7.4.0",
+]
+
+[tool.ruff]
+cache-dir = "build/ruff_cache"

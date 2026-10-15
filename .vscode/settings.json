@@ -1,0 +1,20 @@
+{
+    "remote": {
+        "autoForwardPorts": false
+    },
+    "python.defaultInterpreterPath": "${env:HOME}/.venv/bin/python",
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.formatOnSave": true
+    },
+    "[notebook]": {
+        "editor.defaultFormatter": "charliermarsh.ruff",
+        "editor.formatOnSave": true
+    },
+    "notebook.formatOnSave.enabled": true,
+    "telemetry.feedback.enabled": false,
+    "telemetry.editStats.details.enabled": false,
+    "telemetry.editStats.showDecorations": false,
+    "telemetry.editStats.enabled": false,
+    "editor.experimental.treeSitterTelemetry": false
+}

@@ -1,0 +1,33 @@
+{
+	"name": "PRML",
+	"build": {
+		"context": "..",
+		"dockerfile": "Dockerfile"
+	},
+	"containerUser": "devcontainer",
+	"userEnvProbe": "loginInteractiveShell",
+	"updateRemoteUserUID": true,
+	"runArgs": [
+		"--rm",
+		"-it",
+		"--memory",
+		"8g",
+		"--memory-swap",
+		"8g",
+		"--cpus",
+		"4"
+	],
+	"containerEnv": {},
+	"workspaceMount": "source=${localWorkspaceFolder},target=/PRML,type=bind,consistency=cached",
+	"workspaceFolder": "/PRML",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python",
+				"ms-python.debugpy",
+				"ms-toolsai.jupyter",
+				"charliermarsh.ruff"
+			]
+		}
+	}
+}

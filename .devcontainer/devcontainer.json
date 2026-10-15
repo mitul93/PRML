@@ -2,7 +2,7 @@
 	"name": "PRML",
 	"build": {
 		"context": "..",
-		"dockerfile": "Dockerfile"
+		"dockerfile": "Containerfile"
 	},
 	"containerUser": "devcontainer",
 	"userEnvProbe": "loginInteractiveShell",

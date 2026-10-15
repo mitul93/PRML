@@ -44,7 +44,7 @@ RUN mkdir -p /home/${USERNAME}/.venv
 ENV UV_LINK_MODE=copy
 ENV UV_COMPILE_BYTECODE=1
 ENV UV_PROJECT_ENVIRONMENT=/home/${USERNAME}/.venv
-ENV PATH="/opt/venv/bin:$PATH"
+ENV PATH="/home/${USERNAME}/.venv/bin:$PATH"
 
 # Install dependencies
 RUN --mount=type=bind,source=pyproject.toml,target=/tmp/uv-project/pyproject.toml \

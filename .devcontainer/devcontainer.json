@@ -7,6 +7,7 @@
 	"containerUser": "devcontainer",
 	"userEnvProbe": "loginInteractiveShell",
 	"updateRemoteUserUID": true,
+	"postStartCommand": "uv sync --frozen",
 	"runArgs": [
 		"--rm",
 		"-it",

@@ -1,15 +1,21 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended"],
-  "prHourlyLimit": 10,
-  "lockFileMaintenance": {
-    "enabled": true,
-    "schedule": ["at any time"]
-  },
-  "packageRules": [
-    {
-      "matchDatasources": ["pypi"],
-      "minimumReleaseAge": "14 days"
-    }
-  ]
+    "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+    "extends": [
+        "config:recommended"
+    ],
+    "prHourlyLimit": 10,
+    "lockFileMaintenance": {
+        "enabled": true,
+        "schedule": [
+            "at any time"
+        ]
+    },
+    "packageRules": [
+        {
+            "matchDatasources": [
+                "pypi"
+            ],
+            "minimumReleaseAge": "14 days"
+        }
+    ]
 }

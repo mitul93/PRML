@@ -16,6 +16,34 @@
                 "pypi"
             ],
             "minimumReleaseAge": "14 days"
+        },
+        {
+            "description": "Disable Python version updates in .python-version",
+            "matchManagers": [
+                "pyenv"
+            ],
+            "matchDepNames": [
+                "python"
+            ],
+            "enabled": false
+        },
+        {
+            "description": "Disable Python image version updates but allow digest updates",
+            "matchManagers": [
+                "dockerfile"
+            ],
+            "matchDatasources": [
+                "docker"
+            ],
+            "matchPackageNames": [
+                "python"
+            ],
+            "matchUpdateTypes": [
+                "major",
+                "minor",
+                "patch"
+            ],
+            "enabled": false
         }
     ]
 }

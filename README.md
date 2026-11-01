@@ -85,3 +85,9 @@ $ uv run ruff check .
 #### Configure Torch installation with uv
 
 https://docs.astral.sh/uv/guides/integration/pytorch/
+
+#### uv add package and its module
+
+```shell
+uv add "rerun-sdk[notebook]"
+```

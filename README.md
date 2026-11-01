@@ -73,3 +73,15 @@ python example/hello_world.py
 or
 
 Open file [hello_world.ipynb](example_notebook/hello_world.ipynb) and click on `Run All` button.
+
+## Useful tips
+
+#### To run linting
+
+```shell
+$ uv run ruff check .
+```
+
+#### Configure Torch installation with uv
+
+https://docs.astral.sh/uv/guides/integration/pytorch/

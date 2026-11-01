@@ -11,6 +11,7 @@ dependencies = [
     "matplotlib>=3.11.2",
     "numpy>=2.5.4",
     "pandas>=3.0.6",
+    "rerun-sdk[notebook]>=0.41.0",
     "ruff>=0.17.0",
     "scikit-learn>=1.9.1",
     "sympy>=1.14.0",

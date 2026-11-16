@@ -19,8 +19,8 @@
 		"4"
 	],
 	"containerEnv": {},
-	"workspaceMount": "source=${localWorkspaceFolder},target=/PRML,type=bind,consistency=cached",
-	"workspaceFolder": "/PRML",
+	"workspaceFolder": "/${localWorkspaceFolderBasename}",
+	"workspaceMount": "source=${localWorkspaceFolder},target=/${localWorkspaceFolderBasename},type=bind,consistency=cached",
 	"customizations": {
 		"vscode": {
 			"extensions": [
